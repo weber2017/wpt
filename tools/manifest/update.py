@@ -23,7 +23,7 @@ def update(tests_root: str,
            manifest_path: Optional[str] = None,
            working_copy: bool = True,
            cache_root: Optional[str] = None,
-           subdirs_to_update: Optional[List[Text]] = None,
+           paths_to_update: Optional[List[Text]] = None,
            rebuild: bool = False,
            parallel: bool = True
            ) -> bool:
@@ -31,7 +31,7 @@ def update(tests_root: str,
     logger.info("Updating manifest")
 
     tree = vcs.get_tree(tests_root, manifest, manifest_path, cache_root,
-                        subdirs_to_update, working_copy, rebuild)
+                        paths_to_update, working_copy, rebuild)
     return manifest.update(tree, parallel)
 
 
@@ -46,7 +46,7 @@ def update_from_cli(**kwargs: Any) -> None:
     manifest.load_and_update(tests_root,
                              path,
                              kwargs["url_base"],
-                             subdirs_to_update=kwargs['tests'],
+                             paths_to_update=kwargs['tests'],
                              update=True,
                              rebuild=kwargs["rebuild"],
                              cache_root=kwargs["cache_root"],
@@ -83,7 +83,8 @@ def create_parser() -> argparse.ArgumentParser:
         help="Do not parallelize building the manifest")
     parser.add_argument('tests',
                         nargs='*',
-                        help='Paths of test files or directories to update.')
+                        help=('Test files or directories to update. '
+                              'Omit to update all items under the test root.'))
     return parser
 
 
