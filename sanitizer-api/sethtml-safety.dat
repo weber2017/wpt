@@ -34,17 +34,17 @@ script
 |   "xxx"
 
 #data
-<img src="https://example.com/test-image" onclick="2+2" one="two">
+<img src="https://bla.com/blubb" onclick="2+2" one="two">
 #document
 | <img>
-|   src="https://example.com/test-image"
+|   src="https://bla.com/blubb"
 
 #data
-<img src="https://example.com/test-image" onclick="2+2" one="two">
+<img src="https://bla.com/blubb" onclick="2+2" one="two">
 #config
 { "attributes": ["src", "onclick", "one"]}
 #document
 | <img>
 |   one="two"
-|   src="https://example.com/test-image"
+|   src="https://bla.com/blubb"
 

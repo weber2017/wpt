@@ -54,7 +54,7 @@ function createObjectStoreWithIndex(
 }
 
 function createTransactionAndReturnObjectStore(db, storeName) {
-  const tx = db.transaction(storeName, 'readwrite');
+  const tx = db.transaction(storeName, 'readwrite', {durability: 'relaxed'});
   const store = tx.objectStore(storeName);
   return {tx, store};
 }

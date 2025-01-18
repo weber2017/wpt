@@ -17,7 +17,8 @@
 // META: variant=?51-55
 // META: variant=?56-60
 // META: variant=?61-65
-// META: variant=?66-last
+// META: variant=?66-70
+// META: variant=?71-last
 
 "use strict;"
 
@@ -347,6 +348,27 @@ makeTest({
   expect: EXPECT_PROMISE_ERROR,
   expectPromiseError: EXPECT_EXCEPTION(TypeError),
   auctionConfigOverrides: { sellerSignals: { sig: BigInt(13) } },
+});
+
+makeTest({
+  name: 'directFromSellerSignals is invalid',
+  expect: EXPECT_PROMISE_ERROR,
+  expectPromiseError: EXPECT_EXCEPTION(TypeError),
+  auctionConfigOverrides: { directFromSellerSignals: "https://foo:99999999999" },
+});
+
+makeTest({
+  name: 'directFromSellerSignals is cross-origin with seller',
+  expect: EXPECT_PROMISE_ERROR,
+  expectPromiseError: EXPECT_EXCEPTION(TypeError),
+  auctionConfigOverrides: { directFromSellerSignals: "https://example.com" },
+});
+
+makeTest({
+  name: 'directFromSellerSignals has nonempty query',
+  expect: EXPECT_PROMISE_ERROR,
+  expectPromiseError: EXPECT_EXCEPTION(TypeError),
+  auctionConfigOverrides: { directFromSellerSignals: window.location.origin + "?foo=bar" },
 });
 
 makeTest({

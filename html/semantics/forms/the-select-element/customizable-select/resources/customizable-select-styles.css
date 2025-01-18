@@ -7,9 +7,6 @@
 }
 
 .customizable-select-popover {
-  position: fixed;
-  width: fit-content;
-  height: fit-content;
   box-sizing: border-box;
   border: 1px solid;
   padding: 0;
@@ -36,7 +33,7 @@
   padding-inline: 0.5em;
   padding-block-end: 0;
   display: flex;
-  align-items: center;
+  place-items: center;
   gap: 0.5em;
   white-space: nowrap;
 }
@@ -84,7 +81,6 @@
 
 .customizable-select-button::after {
   content: counter(fake-counter-name, disclosure-open);
-  margin-inline-start: auto;
 }
 
 .customizable-select-legend {

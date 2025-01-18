@@ -48,7 +48,7 @@ function runTopLayerTests(testCases, testAnchorAttribute) {
         // Add another popover within the top layer element and make sure entire stack stays open.
         const newPopover = document.createElement('div');
         t.add_cleanup(() => newPopover.remove());
-        newPopover.popover = 'hint';
+        newPopover.popover = popoverHintSupported() ? 'hint' : 'auto';
         element.appendChild(newPopover);
         popovers.forEach(popover => assert_equals(popover.matches(':popover-open'),popover.dataset.stayOpen==='true','Adding another popover shouldn\'t change anything'));
         assert_true(showing(),'top layer element should still be top layer');
@@ -60,7 +60,7 @@ function runTopLayerTests(testCases, testAnchorAttribute) {
 
       promise_test(async t => {
         const {element,show,showing} = createTopLayerElement(t,topLayerType);
-        element.popover = 'hint';
+        element.popover = popoverHintSupported() ? 'hint' : 'auto';
         target.appendChild(element);
 
         // Show the popovers.

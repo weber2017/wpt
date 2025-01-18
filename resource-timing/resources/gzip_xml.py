@@ -20,7 +20,4 @@ def main(request, response):
                (b"Content-Encoding", b"gzip"),
                (b"Content-Length", len(output))]
 
-    if b'allow_origin' in request.GET:
-      headers.append((b'access-control-allow-origin', request.GET.first(b'allow_origin')))
-
     return headers, output

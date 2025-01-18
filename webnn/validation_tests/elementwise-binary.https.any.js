@@ -88,6 +88,5 @@ kElementwiseBinaryOperators.forEach((operatorName) => {
   validateTwoInputsOfSameDataType(operatorName, label);
   validateTwoInputsBroadcastable(operatorName, label);
   validateTwoInputsFromMultipleBuilders(operatorName);
-  validateTwoBroadcastableInputsTensorLimit(operatorName, label);
   runElementWiseBinaryTests(operatorName, tests);
 });

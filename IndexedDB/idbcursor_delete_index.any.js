@@ -37,7 +37,7 @@ async_test(t => {
   open_rq.onsuccess = t.step_func(CursorDeleteRecord);
 
   function CursorDeleteRecord(e) {
-    let txn = dbObj.db.transaction("test", "readwrite"),
+    let txn = dbObj.db.transaction("test", "readwrite", { durability: 'relaxed' }),
       cursor_rq = txn.objectStore("test")
         .index("index")
         .openCursor();
@@ -54,7 +54,7 @@ async_test(t => {
 
 
   function VerifyRecordWasDeleted(e) {
-    let cursor_rq = dbObj.db.transaction("test", "readonly")
+    let cursor_rq = dbObj.db.transaction("test", "readonly", { durability: 'relaxed' })
       .objectStore("test")
       .openCursor();
 
@@ -85,7 +85,7 @@ async_test(t => {
   open_rq.onupgradeneeded = setOnUpgradeNeeded(dbObj, records);
 
   open_rq.onsuccess = function (e) {
-    let cursor_rq = dbObj.db.transaction("test", "readonly")
+    let cursor_rq = dbObj.db.transaction("test", "readonly", { durability: 'relaxed' })
       .objectStore("test")
       .index("index")
       .openCursor();

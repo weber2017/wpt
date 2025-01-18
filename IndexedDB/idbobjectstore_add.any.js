@@ -19,7 +19,7 @@ async_test(t => {
     };
 
     open_rq.onsuccess = function(e) {
-      const rq = db.transaction("store", "readonly")
+      const rq = db.transaction("store", "readonly", { durability: 'relaxed' })
         .objectStore("store")
         .get(record.key);
 
@@ -45,7 +45,7 @@ async_test(t => {
     };
 
     open_rq.onsuccess = function(e) {
-      const rq = db.transaction("store", "readonly")
+      const rq = db.transaction("store", "readonly", { durability: 'relaxed' })
         .objectStore("store")
         .get(key);
 
@@ -127,7 +127,7 @@ async_test(t => {
     };
 
     open_rq.onsuccess = function(e) {
-      const rq = db.transaction("store", "readonly")
+      const rq = db.transaction("store", "readonly", { durability: 'relaxed' })
         .objectStore("store")
         .get(record.test.obj.key);
 
@@ -158,7 +158,7 @@ async_test(t => {
 
     open_rq.onsuccess = function(e) {
       const actual_keys = [];
-      const rq = db.transaction("store", "readonly")
+      const rq = db.transaction("store", "readonly", { durability: 'relaxed' })
         .objectStore("store")
         .openCursor();
 
@@ -194,7 +194,7 @@ async_test(t => {
 
     open_rq.onsuccess = function(e) {
       const actual_keys = [];
-      const rq = db.transaction("store", "readonly")
+      const rq = db.transaction("store", "readonly", { durability: 'relaxed' })
         .objectStore("store")
         .openCursor();
 
@@ -231,7 +231,7 @@ async_test(t => {
 
     open_rq.onsuccess = function(e) {
       const actual_keys = [];
-      const rq = db.transaction("store", "readonly")
+      const rq = db.transaction("store", "readonly", { durability: 'relaxed' })
         .objectStore("store")
         .openCursor();
 
@@ -380,7 +380,8 @@ async_test(t => {
     }
 
     open_rq.onsuccess = function (event) {
-        const txn = db.transaction("store", "readonly");
+        const txn = db.transaction("store", "readonly",
+         {durability: 'relaxed'});
         const ostore = txn.objectStore("store");
         t.step(function() {
             assert_throws_dom("ReadOnlyError", function() {

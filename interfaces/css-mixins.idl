@@ -5,13 +5,3 @@
 
 [Exposed=Window]
 interface CSSFunctionRule : CSSGroupingRule { };
-
-[Exposed=Window]
-interface CSSFunctionDescriptors : CSSStyleDeclaration {
-  attribute [LegacyNullToEmptyString] CSSOMString result;
-};
-
-[Exposed=Window]
-interface CSSFunctionDeclarations : CSSRule {
-  [SameObject, PutForwards=cssText] readonly attribute CSSFunctionDescriptors style;
-};

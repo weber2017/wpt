@@ -1,4 +1,5 @@
-const globalThisStr = getGlobalThisStr();
+// `globalThis.toString()` is of the form "[Object <someName>]".
+const globalThisStr = globalThis.toString().split(" ")[1].slice(0, -1);
 
 async_test(t => {
   globalThis.timeoutTrustedTest = t;
@@ -17,7 +18,7 @@ async_test(t => {
 globalThis.trustedTypes.createPolicy("default", {createScript: (s, _, sink) => {
   // https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#timer-initialisation-steps,
   // step 9.6.1.1.
-  const expectedSink = globalThisStr.includes("Window") ? "Window" : "WorkerGlobalScope";
+  const expectedSink = globalThisStr.includes("Window") ? "Window" : "Worker";
 
   if (s === "timeoutStringTest") {
     assert_equals(sink, `${expectedSink} setTimeout`);

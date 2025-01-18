@@ -63,7 +63,7 @@ async function waitForPointercancelEvent(test, target, timeoutMs = 500) {
 // promise is not resolved until the scrollend event is received.
 async function waitForScrollReset(test, scroller, x = 0, y = 0) {
   return new Promise(resolve => {
-    if (scroller.scrollLeft == x && scroller.scrollTop == y) {
+    if (scroller.scrollTop == x && scroller.scrollLeft == y) {
       resolve();
     } else {
       const eventTarget =

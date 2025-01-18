@@ -19,7 +19,7 @@ async_test(t => {
     }
 
     open_rq.onsuccess = function(e) {
-        let rq = db.transaction("store", "readonly")
+        let rq = db.transaction("store", "readonly", {durability: 'relaxed'})
                    .objectStore("store")
                    .count();
 
@@ -45,7 +45,7 @@ async_test(t => {
     }
 
     open_rq.onsuccess = function(e) {
-        let rq = db.transaction("store", "readonly")
+        let rq = db.transaction("store", "readonly", {durability: 'relaxed'})
                    .objectStore("store")
                    .count(IDBKeyRange.bound(5, 20));
 

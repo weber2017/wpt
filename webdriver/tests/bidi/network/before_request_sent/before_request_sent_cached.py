@@ -370,12 +370,10 @@ async def test_page_with_cached_script_javascript(
         wait="complete",
     )
 
-    # Expect two or three events, one for the document and the rest for javascript files.
-    # If the browser uses memory caching there may be only single request for the javascript files,
-    # see issue https://github.com/whatwg/html/issues/6110.
+    # Expect three events, one for the document and two for script javascript files.
     wait = AsyncPoll(bidi_session, timeout=2)
-    await wait.until(lambda _: len(events) >= 6)
-    assert len(events) >= 6
+    await wait.until(lambda _: len(events) >= 7)
+    assert len(events) == 7
 
     # Assert only cached events after reload.
     cached_events = events[4:]
@@ -388,11 +386,10 @@ async def test_page_with_cached_script_javascript(
         cached_events[1],
         expected_request={"method": "GET", "url": cached_script_js_url},
     )
-    if len(events) > 6:
-        assert_before_request_sent_event(
-            cached_events[2],
-            expected_request={"method": "GET", "url": cached_script_js_url},
-        )
+    assert_before_request_sent_event(
+        cached_events[2],
+        expected_request={"method": "GET", "url": cached_script_js_url},
+    )
 
 
 @pytest.mark.asyncio

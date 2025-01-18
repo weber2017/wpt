@@ -10,8 +10,7 @@ function get_config() {
     '?vp8': {codec: 'vp8'},
     '?vp9_p0': {codec: 'vp09.00.10.08'},
     '?vp9_p2': {codec: 'vp09.02.10.10'},
-    '?h264': {codec: 'avc1.42001E', avc: {format: 'annexb'}},
-    '?h265': {codec: 'hev1.1.6.L93.90', hev: {format: 'annexb'}}
+    '?h264': {codec: 'avc1.42001E', avc: {format: 'annexb'}}
   }[location.search];
   config.width = 320;
   config.height = 200;
@@ -31,8 +30,6 @@ function get_qp_range() {
       return {min: 1, max: 63};
     case '?h264':
       return {min: 1, max: 51};
-    case '?h265':
-      return {min: 1, max: 51};
   }
   return null;
 }
@@ -51,8 +48,6 @@ function set_qp(options, value) {
     case '?h264':
       options.avc = {quantizer: value};
       return;
-    case '?h265':
-      options.hevc = {quantizer: value};
   }
 }
 

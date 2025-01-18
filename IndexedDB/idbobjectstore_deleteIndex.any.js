@@ -28,7 +28,8 @@ async_test(t => {
 
         new_version.onsuccess = function(e) {
             let index;
-            const objStore = db.transaction("test", "readonly")
+            const objStore = db.transaction("test", "readonly",
+            { durability: 'relaxed' })
                                .objectStore("test");
 
             assert_throws_dom('NotFoundError', function()
